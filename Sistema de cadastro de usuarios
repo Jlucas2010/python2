@@ -1,0 +1,43 @@
+import re
+
+print("Sistema de cadastro de usuarios")
+
+emailIntrodusido = input("Introdusa o seu email.")
+senhaIntodusido = input("Introdusa a sua senha.")
+nome = input("Introdusa o seu Nome.")
+listaUsuarios = [["j@alam.com", "j", "j"]]
+x = 1
+
+
+def Valido(emailIntrodusido):
+    v = re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', emailIntrodusido)
+    if v == None:
+        print("Email invalido.")
+    return v
+
+
+def emails(emailIntrodusido):
+    Temp = []
+    for usuario in listaUsuarios:
+        if usuario[0] == emailIntrodusido:
+            print("Email já cadastrado, Introdusa outro")
+            return
+    Temp.append(emailIntrodusido)
+    Temp.append(senhaIntodusido)
+    Temp.append(nome)
+    listaUsuarios.append(Temp)
+    print("Email cadastrado.")
+
+
+v = Valido(emailIntrodusido)
+if v != None:
+    emails(emailIntrodusido)
+
+while x == 1:
+    emailIntrodusido = input("Introdusa o seu email.")
+    senhaIntodusido = input("Introdusa a sua senha.")
+    nome = input("Introdusa o seu Nome.")
+
+    v = Valido(emailIntrodusido)
+    if v != None:
+        emails(emailIntrodusido)
