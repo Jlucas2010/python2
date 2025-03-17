@@ -1,4 +1,3 @@
-
 def criar_ficheiro():
     nome = input("Intrudusa um nome para o ficheiro: ")
     with open(nome, "w") as file:
@@ -19,11 +18,21 @@ def ler():
         for l in leitora:
             print(l)
 
+def procura():
+    nome = input("Nome do ficheiro a ler: ")
+    palavra = input("Intrudosa a palavra: ")
+    with open(f"{nome}", "r", encoding="utf-8") as file:
+        for linha in file:
+            if palavra in linha:
+                print(linha.rstrip())
+
+
 def escolha():
     print("")
     print("Digite 1 para criar ficheiro.")
     print("Digite 2 para escrever em um ficheiro.")
     print("Digite 3 para ler um ficheiro.")
+    print("Digite 4 para procorar uma palavra em um ficheiro.")
     escolha = input("O que deseja fazer ? : ")
     print("")
     if escolha == "1":
@@ -32,6 +41,8 @@ def escolha():
         escrita()
     elif escolha == "3":
         ler()
+    elif escolha == "4":
+        procura()
 
 while True:
     escolha()
