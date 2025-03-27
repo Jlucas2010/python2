@@ -1,0 +1,98 @@
+from tkinter import *
+from tkinter import messagebox
+
+root = Tk()
+root.title("Lista de Contactos")
+root.geometry("380x500+500+100")
+root.wm_resizable(width=False, height=False)
+
+agendal = Label(root, text="Sharkcoders Python", font="Time 20 bold", bg="#fafa00", fg="#fafa00", anchor="w", padx=10)
+agendal.place(width=380, height=50, x=100, y=0)
+
+nomel = Label(root, text="Nome", font="Time 10", anchor="w")
+nomel.place(width=60, height=20, x=10, y=70)
+input_nomel = Entry(root, font="Time 10")
+input_nomel.place(width=250, height=20, x=100, y=70)
+
+tell = Label(root, text="Telemóvel", font="Time 10", anchor="w")
+tell.place(width=60, height=20, x=10, y=110)
+input_tell = Entry(root, font="Time 10")
+input_tell.place(width=250, height=20, x=100, y=110)
+
+distl = Label(root, text="Distrito", font="Time 10", anchor="w")
+distl.place(width=60, height=20, x=10, y=210)
+input_distl = Entry(root, font="Time 10")
+input_distl.place(width=80, height=20, x=100, y=210)
+
+endl = Label(root, text="Endereço", font="Time 10", anchor="w")
+endl.place(width=60, height=20, x=10, y=170)
+input_endl = Entry(root, font="Time 10")
+input_endl.place(width=250, height=20, x=100, y=170)
+
+paisl = Label(root, text="Pais", font="Time 10", anchor="w")
+paisl.place(width=60, height=20, x=210, y=210)
+input_paisl = Entry(root, font="Time 10")
+input_paisl.place(width=80, height=20, x=270, y=210)
+
+emaill = Label(root, text="Email", font="Time 10", anchor="w")
+emaill.place(width=60, height=20, x=10, y=270)
+input_emaill = Entry(root, font="Time 10")
+input_emaill.place(width=250, height=20, x=100, y=270)
+
+
+def adicionar():
+    nome = input_nomel.get()
+    tel = input_tell.get()
+    end = input_endl.get()
+    dist = input_distl.get()
+    pais = input_paisl.get()
+    email = input_emaill.get()
+    with open("agenda.txt", "a", encoding="utf-8") as arquivo:
+        arquivo.write(f"{nome}\n{tel}\n{end}\n{dist}\n{pais}\n{email}\n")
+
+    messagebox.showinfo("Agenda", "Cadastro Efetuado com Sucesso!")
+
+    input_nomel.delete("0", "end")
+    input_tell.delete("0", "end")
+    input_distl.delete("0", "end")
+    input_endl.delete("0", "end")
+    input_paisl.delete("0", "end")
+    input_emaill.delete("0", "end")
+
+
+def procurar():
+    nome = input_nomel.get()
+
+    with open("agenda.txt", "r", encoding="utf-8") as arquivo:
+        for linha in arquivo:
+            if nome in linha:
+                a_tel = (arquivo.readline())
+                b_end = (arquivo.readline())
+                c_dist = (arquivo.readline())
+                d_pais = (arquivo.readline())
+                e_email = (arquivo.readline())
+
+                l_nome_busca = Label(root, text=linha, font="Time 10", anchor="w")
+                l_nome_busca.place(width=250, height=30, x=20, y=360)
+                l_tel_busca = Label(root, text=a_tel, font="Time 10", anchor="w")
+                l_tel_busca.place(width=250, height=30, x=20, y=380)
+                l_end_busca = Label(root, text=b_end, font="Time 10", anchor="w")
+                l_end_busca.place(width=250, height=30, x=20, y=400)
+                l_dist_busca = Label(root, text=c_dist, font="Time 10", anchor="w")
+                l_dist_busca.place(width=100, height=30, x=20, y=420)
+                l_pais_busca = Label(root, text=d_pais, font="Time 10", anchor="w")
+                l_pais_busca.place(width=250, height=30, x=20, y=440)
+                l_email_busca = Label(root, text=e_email, font="Time 10", anchor="w")
+                l_email_busca.place(width=250, height=30, x=20, y=460)
+            else:
+                messagebox.showerror("Agenda", "Cadastro não encontrado!")
+                break
+
+
+b_adicionar = Button(root, text="Adicionar", command=adicionar, font="Time 10", bg="#0000ff", fg="#ffffff")
+b_adicionar.place(width=80, height=30, x=70, y=310)
+
+b_procurar = Button(root, text="Pesquisar", command=procurar, font="Time 10", bg="#0000ff", fg="#ffffff")
+b_procurar.place(width=80, height=30, x=240, y=310)
+
+root.mainloop()
