@@ -1,0 +1,47 @@
+from tkinter import *
+
+root = Tk()
+root.title("IMC Calculator")
+
+
+def calculate():
+    peso2 = float(peso1.get())
+    altura2 = float(altura1.get())
+    imc = peso2 / (altura2 * altura2)
+    imc = round(imc, 1)
+    result = Label(root, text=imc, font="Times 20")
+    result.place(width=150, height=30, x=160, y=220)
+    if imc < 18.5:
+        imagem_path = "imc_magro.png"
+    elif imc < 24.9:
+        imagem_path = "imc_normal.png"
+    elif imc < 29.9:
+        imagem_path = "imc_sobrepeso.png"
+    elif imc < 39.9:
+        imagem_path = "imc_obeso.png"
+    else:
+        imagem_path = "imc_obeso_2.png"
+
+    imagem = PhotoImage(file=imagem_path)
+    imageml.config(image=imagem)
+    imageml.image = imagem
+
+
+
+
+calculator = Label(root, text="IMC Calculator", font="Times 30")
+calculator.place(width=250, height=50, x=115, y=10)
+peso = Label(root, text="Peso:", font="Times 15")
+peso.place(width=250, height=50, x=0, y=70)
+peso1 = Entry(root)
+peso1.place(width=200, height=20, x=166, y=87)
+altura = Label(root, text="Altura:", font="Times 15")
+altura.place(width=250, height=50, x=0, y=120)
+altura1 = Entry(root)
+altura1.place(width=200, height=20, x=166, y=137)
+bcalculate = Button(root, text="Calculate", command=calculate)
+bcalculate.place(width=150, height=30, x=160, y=180)
+imageml = Label(root)
+imageml.place(width=150, heigh=150, x=160, y=250)
+
+root.mainloop()
