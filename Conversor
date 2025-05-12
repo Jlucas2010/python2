@@ -1,0 +1,60 @@
+import requests
+import json
+
+
+def moeda_de_origem(moedao):
+    match moedao:
+        case 1:
+            return "USD"
+        case 2:
+            return "EUR"
+        case 3:
+            return "BRL"
+
+
+def moeda_de_chegada(moedac):
+    match moedac:
+        case 1:
+            return "USD"
+        case 2:
+            return "EUR"
+        case 3:
+            return "BRL"
+
+
+def conversao():
+    origem = moeda_de_origem(moedao)
+    chegada = moeda_de_chegada(moedac)
+    url = requests.get(f"https://economia.awesomeapi.com.br/last/{origem}-{chegada}")
+    x = url.json()
+    conversor = float(x[f"{origem}{chegada}"]['bid'])
+
+    print("")
+    valor = float(input("Que valor deseija converter : "))
+    coversao = valor * conversor
+    print(coversao)
+
+
+while True:
+    print("///////////////////////////////////////")
+    print("//                                   //")
+    print("//         Conversor de moedas       //")
+    print("//                                   //")
+    print("///////////////////////////////////////")
+    print("")
+    print("Qual a sua moeda de origem ?")
+    print("1 - Dolar Americano")
+    print("2 - Euro")
+    print("3 - Real Brasileiro")
+    print("")
+    moedao = int(input("Selecione a moeda que desejar : "))
+    print("")
+    print("Para que moeda deseja coverter ?")
+    print("1 - Dolar Americano")
+    print("2 - Euro")
+    print("3 - Real Brasileiro")
+    print("")
+    moedac = int(input("Selecione a moeda que desejar : "))
+
+    conversao()
+    print("")
